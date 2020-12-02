@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>watermark-svg</title>
+</head>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+}
+.watermark {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  pointer-events: none;
+  background-repeat: repeat;
+}
+</style>
+<body>
+  <p>凉风有信</p>
+  <p>嘻嘻嘻</p>
+</body>
+</html>
+<script>
+  const createWaterMarks = () => { 
+    const svgStr =
+      `<svg xmlns="http://www.w3.org/2000/svg" width="180px" height="100px">
+        <text x="0px" y="30px" dy="16px"
+        text-anchor="start"
+        stroke="#000"
+        stroke-opacity="0.1"
+        fill="none"
+        transform="rotate(-20)"
+        font-weight="100"
+        font-size="16"
+        >
+          凉风有信
+        </text>
+      </svg>`;
+    return `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(svgStr)))}`;
+  }
+  const createSvg = () => {
+    const watermakr = document.createElement('div');
+    watermakr.className = 'watermark';
+    watermakr.style.backgroundImage = `url(${createWaterMarks()})`;                                                                
+    document.body.appendChild(watermakr);
+  }
+  createSvg()
+</script>
